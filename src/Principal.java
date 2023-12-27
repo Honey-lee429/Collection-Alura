@@ -3,6 +3,10 @@ import br.com.alura.screenmatch.calculos.FiltroRecomendacao;
 import br.com.alura.screenmatch.modelos.Episodio;
 import br.com.alura.screenmatch.modelos.Filme;
 import br.com.alura.screenmatch.modelos.Serie;
+import br.com.alura.screenmatch.modelos.Titulo;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class Principal {
     public static void main(String[] args) {
@@ -10,12 +14,9 @@ public class Principal {
         meuFilme.setNome("O poderoso chefão");
         meuFilme.setAnoDeLancamento(1970);
         meuFilme.setDuracaoEmMinutos(180);
-        System.out.println("Duração do filme: " + meuFilme.getDuracaoEmMinutos());
-
-        meuFilme.exibeFichaTecnica();
         meuFilme.avalia(8);
-        meuFilme.avalia(5);
-        meuFilme.avalia(10);
+        System.out.println("Duração do filme: " + meuFilme.getDuracaoEmMinutos());
+        meuFilme.exibeFichaTecnica();
         System.out.println("Total de avaliações: " + meuFilme.getTotalDeAvaliacoes());
         System.out.println(meuFilme.pegaMedia());
         //meuFilme.somaDasAvaliacoes = 10;
@@ -35,6 +36,12 @@ public class Principal {
         outroFilme.setNome("Avatar");
         outroFilme.setAnoDeLancamento(2023);
         outroFilme.setDuracaoEmMinutos(200);
+        outroFilme.avalia(10);
+
+        var it = new Filme();
+        it.setNome("it");
+        it.setAnoDeLancamento(2015);
+        it.setDuracaoEmMinutos(205);
 
         CalculadoraDeTempo calculadora = new CalculadoraDeTempo();
         calculadora.inclui(meuFilme);
@@ -45,10 +52,46 @@ public class Principal {
         FiltroRecomendacao filtro = new FiltroRecomendacao();
         filtro.filtra(meuFilme);
 
-        Episodio episodio = new Episodio();
+        var episodio = new Episodio();
         episodio.setNumero(1);
         episodio.setSerie(lost);
         episodio.setTotalVisualizacoes(300);
         filtro.filtra(episodio);
+
+
+        ArrayList<Titulo> lista = new ArrayList<>();
+        lista.add(meuFilme);
+        lista.add(it);
+        lista.add(outroFilme);
+        lista.add(lost);
+
+        System.out.println("lista " + lista.toString());
+
+        lista.forEach(titulo -> System.out.println(titulo.getNome()));
+        lista.forEach(System.out::println);
+
+        for (Titulo item : lista) {
+            System.out.println("for each " + item.getNome());
+            Filme filme = (Filme) item;
+            // var f = new Filme(); não tem referencia
+            System.out.println("classificacao " + filme.getClassificacao());
+            // solta uma java.lang.ClassCastException pois não compila a classe Serie
+        }
+       // resolvendo a Exception ClassCastException
+        for (Titulo item : lista) {
+            System.out.println("for each " + item.getNome());
+            if (item instanceof Filme filme && filme.getClassificacao() > 2) {
+                System.out.println("classificacao " + filme.getClassificacao());
+            }
+
+        }
+
+        // var notas = new ArrayList<>(); //Generics(jdk 5) - Diamont Operator(jdk 7)
+        List<Double> notas = new ArrayList<>();
+        notas.add(7d);
+        notas.add(8d);
+        notas.add(6.7);
+        notas.add(3.5);
+        System.out.println(notas);
     }
 }

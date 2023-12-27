@@ -57,4 +57,9 @@ public class Titulo {
     public double pegaMedia(){
         return somaDasAvaliacoes / totalDeAvaliacoes;
     }
+
+    @Override
+    public String toString() {
+        return "nome " + this.getNome() + " ano " + this.anoDeLancamento;
+    }
 }

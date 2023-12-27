@@ -11,6 +11,7 @@ public class CalculadoraDeTempo {
         return this.tempoTotal;
     }
 
+    // criar um metodo generico para incluir qualquer titulo
 //    public void inclui(Filme f) {
 //        this.tempoTotal += f.getDuracaoEmMinutos();
 //    }
@@ -19,6 +20,8 @@ public class CalculadoraDeTempo {
 //        this.tempoTotal += s.getDuracaoEmMinutos();
 //    }
 
+
+// polimorfismo
     public void inclui(Titulo titulo) {
         System.out.println("Adicionando duração em minutos de " + titulo);
         this.tempoTotal += titulo.getDuracaoEmMinutos();
