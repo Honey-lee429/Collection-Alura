@@ -5,8 +5,7 @@ import br.com.alura.screenmatch.modelos.Filme;
 import br.com.alura.screenmatch.modelos.Serie;
 import br.com.alura.screenmatch.modelos.Titulo;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 public class Principal {
     public static void main(String[] args) {
@@ -59,24 +58,31 @@ public class Principal {
         filtro.filtra(episodio);
 
 
-        ArrayList<Titulo> lista = new ArrayList<>();
+        List<Titulo> lista = new ArrayList<>();
         lista.add(meuFilme);
         lista.add(it);
         lista.add(outroFilme);
         lista.add(lost);
 
-        System.out.println("lista " + lista.toString());
+        System.out.println("lista: " + lista); // sem implementar o toString na classe Titulo, imprime "br.com.alura.screenmatch.modelos.Filme@38082d64"
 
-        lista.forEach(titulo -> System.out.println(titulo.getNome()));
-        lista.forEach(System.out::println);
+        System.out.println("forEach c/ lamda");
+        lista.forEach(titulo -> System.out.println(titulo.getNome())); // a partir do Java 8
+        System.out.println("forEach System.out::println");
+        lista.forEach(System.out::println); // o símbolo :: é a sintaxe do Method Reference, que no exemplo mostrado faz uma referência para o método println
+        Collections.sort(lista);
+        System.out.println("ordenação nome " + lista);
+        lista.sort(Comparator.comparing(Titulo::getAnoDeLancamento));
+        System.out.println("ordenação ano " +lista);
 
-        for (Titulo item : lista) {
+        /*for (Titulo item : lista) {
             System.out.println("for each " + item.getNome());
             Filme filme = (Filme) item;
             // var f = new Filme(); não tem referencia
             System.out.println("classificacao " + filme.getClassificacao());
             // solta uma java.lang.ClassCastException pois não compila a classe Serie
         }
+
        // resolvendo a Exception ClassCastException
         for (Titulo item : lista) {
             System.out.println("for each " + item.getNome());
@@ -86,6 +92,9 @@ public class Principal {
 
         }
 
+
+ */
+
         // var notas = new ArrayList<>(); //Generics(jdk 5) - Diamont Operator(jdk 7)
         List<Double> notas = new ArrayList<>();
         notas.add(7d);
@@ -93,5 +102,9 @@ public class Principal {
         notas.add(6.7);
         notas.add(3.5);
         System.out.println(notas);
+
+        Collections.sort(notas);
+        System.out.println("ordenação " + notas);
+
     }
 }
