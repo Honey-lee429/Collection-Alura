@@ -2,9 +2,7 @@ package set;
 
 import list.Aula;
 
-import java.util.Collection;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 
 public class CursoSet {
     private String nome;
@@ -31,5 +29,21 @@ public class CursoSet {
 
     public Set<AlunoSet> getAlunoSets() {
         return this.alunoSets;
+    }
+
+    public boolean alunoEstaMatriculado(AlunoSet aluno) {
+        return this.alunoSets.contains(aluno);
+    }
+
+    /*
+    * Utilizando o for para buscar dentro de uma coleção de alunos o nome do aluno
+    * torna menos performatico, para isso utilizados o Map que tem o hashCode como funcionalidade*/
+    public String buscaAulanoPelaMatricula(int matricula) {
+        for (AlunoSet alunoSet : alunoSets) {
+            if (matricula == alunoSet.getMatricula()) {
+                return alunoSet.getNome();
+            }
+        }
+        throw new NoSuchElementException("matricula nao encontrada");
     }
 }

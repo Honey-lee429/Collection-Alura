@@ -1,11 +1,11 @@
-package set;
+package map;
 
-public class AlunoSet {
+public class AlunosMap {
 
     private String nome;
     private int matricula;
 
-    public AlunoSet(String nome, int matricula) {
+    public AlunosMap(String nome, int matricula) {
         if (nome == null) {
             throw new NullPointerException("Nome não pode ser nulo");
         }
@@ -28,7 +28,7 @@ public class AlunoSet {
 
     @Override
     public boolean equals(Object obj) {
-        AlunoSet aluno = (AlunoSet) obj;
+        AlunosMap aluno = (AlunosMap) obj;
         return this.getNome().equals(aluno.getNome());
     }
 
